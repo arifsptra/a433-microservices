@@ -1,0 +1,31 @@
+# Versi Docker Compose
+version: "3.7"
+
+services:
+  item-app:
+    image: arifsaputra/item-app:v1
+    # Selalu restart jika terhenti
+    restart: always
+    # Port mapping agar dapat diakses dari port 80 di host
+    ports:
+      - 80:8080
+    environment:
+      # Set variabel lingkungan NODE_ENV ke "production"
+      NODE_ENV: production
+      # Set variabel lingkungan DB_HOST ke "item-db"
+      DB_HOST: item-db
+    depends_on:
+      # Bergantung pada layanan "item-db" (item-app hanya berjalan setelah item-db diluncurkan)
+      - item-db
+
+  item-db:
+    image: mongo:3
+    # Selalu restart jika terhenti
+    restart: always
+    volumes:
+      # Menggunakan volume "app-db" untuk menyimpan data MongoDB
+      - app-db:/data/db
+
+volumes:
+  # Volume untuk data MongoDB
+  app-db:
