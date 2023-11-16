@@ -10,7 +10,7 @@ COPY . .
 # Menginstal dependencies untuk  aplikasi
 RUN npm install
 
-# Ekspos port 3000 yang digunakan oleh aplikasi
+# Ekspos port 3001 yang digunakan oleh aplikasi
 EXPOSE 3001
 
 # Perintah untuk menjalankan aplikasi  
